@@ -34,7 +34,8 @@ export class FormComponent implements OnInit{
     )
   }
   protected submitForm(){
-    console.log('Submitted! ',this.userForm)
+    console.log('Submitted! ',this.userForm),
+    window.alert('Your request has been submitted!')
   }
   protected invalid(){
     return this.userForm.invalid
