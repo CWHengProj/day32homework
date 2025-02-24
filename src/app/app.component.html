@@ -1,0 +1,5 @@
+<h1>{{title}}</h1>
+<div>
+    <app-inventory [fruits]="fruitsList" (itemUpdated)="updateBasket($event)"></app-inventory>
+    <app-form [cart]="itemBasket"></app-form>
+</div>

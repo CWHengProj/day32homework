@@ -1,0 +1,20 @@
+tr{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    td{
+            display:flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items:start;
+    }
+}
+thead{
+    font-weight:bolder;
+}
+div{
+    border:solid;
+    border-style:ridge;
+    border-radius: 15px;
+}
