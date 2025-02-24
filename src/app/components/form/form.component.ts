@@ -38,7 +38,7 @@ export class FormComponent implements OnInit{
     window.alert('Your request has been submitted!')
   }
   protected invalid(){
-    return this.userForm.invalid
+    return (this.userForm.invalid || (this.cart.length<1))
   }
   protected totalCost():number{
     this.total=0
