@@ -15,21 +15,17 @@ export class FormComponent implements OnInit{
   private fb = inject(FormBuilder)
   //form is a formGroup
   userForm!:FormGroup
-  //the table is a formArray
-  userArray!:FormArray
   total:number=0
   ngOnInit(): void {
     this.createForm()
   }
   protected createForm(){
     //when init, instantiate the types so they can be displayed
-    this.userArray = this.fb.array([])
     this.userForm= this.fb.group(
       {
         name:this.fb.control<string>('',[Validators.required, Validators.minLength(5)]),
         address:this.fb.control<string>('',[Validators.required, Validators.minLength(5)]),
         deliveryType:this.fb.control<string>('delivery',[Validators.required]),
-        userArray: this.userArray
       }
     )
   }
