@@ -17,4 +17,7 @@ export class AppComponent {
     console.log(basket)
     this.itemBasket=basket
   }
+  protected removeCart(event: any){
+    this.itemBasket=[]
+  }
 }

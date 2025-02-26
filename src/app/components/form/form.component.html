@@ -61,14 +61,14 @@
 
                         <td>{{item.name}}</td>
                         <td>{{item.quantity}}</td>
-                        <td>{{item.quantity* item.price | number: '.2-2'}}</td>
+                        <td>{{item.quantity* item.price | currency}}</td>
                     </tr>
                 }
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="2">Total</td>
-                    <td>{{totalCost() | number:'.2-2'}}</td>
+                    <td>{{totalCost() | currency}}</td>
                 </tr>
 
             </tfoot>
@@ -76,3 +76,7 @@
     }
 </table>
 </form>
+<h1>Debug</h1>
+{{this.userForm.value |json}}
+<br>
+{{this.cart | json}}
