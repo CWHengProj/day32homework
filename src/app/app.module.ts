@@ -7,6 +7,7 @@ import { FormComponent } from './components/form/form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     FormComponent
   ],
   imports: [
-    BrowserModule, ReactiveFormsModule, ServiceWorkerModule.register('ngsw-worker.js', {
+    BrowserModule, ReactiveFormsModule, MaterialModule, ServiceWorkerModule.register('ngsw-worker.js', {
   enabled: !isDevMode(),
   // Register the ServiceWorker as soon as the application is stable
   // or after 30 seconds (whichever comes first).
