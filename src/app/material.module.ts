@@ -6,11 +6,13 @@ import { MatInputModule } from "@angular/material/input";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSlideToggle } from "@angular/material/slide-toggle";
 import { MatSliderModule } from "@angular/material/slider";
+import { MatTableModule } from "@angular/material/table";
+
 
 
 
 const MATERIAL = [MatButtonModule,MatIconModule,MatSliderModule,
-    MatSlideToggle,MatFormFieldModule,MatRadioModule,MatInputModule];
+    MatSlideToggle,MatFormFieldModule,MatRadioModule,MatInputModule,MatTableModule];
 
 @NgModule({
     imports:MATERIAL,

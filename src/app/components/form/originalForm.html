@@ -1,0 +1,83 @@
+<!-- <p>debug: {{userForm.value|json}}</p> -->
+     <!-- <p>debug: cart size is {{cart.length}}</p> -->
+     <h4>Form</h4>
+     <form action="submit" [formGroup]="userForm" (submit)="submitForm()">
+     <table>
+             <tbody>
+                 <tr>
+                     <td>
+                         <label id="name">Name:</label>
+                     </td>
+                     <td>
+                         <input type="text" id="name" formControlName="name">
+                         @if(userForm.get('name')?.hasError('required') && !userForm.get('name')?.pristine){
+                             <p>Username needs to be at least 5 characters.</p>
+                         }
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>
+                         <label id="address">Address:</label>
+                     </td>
+                     <td>
+                         <input type="text" id="address" formControlName="address">
+                         @if(userForm.get('address')?.hasError('required') && !userForm.get('address')?.pristine){
+                             <p>Address needs to be at least 5 characters.</p>
+                         }
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>
+                         <label>Delivery Method:</label>
+                         <label id="delivery">Delivery</label>
+                         <input value="delivery" type="radio" id="delivery" formControlName="deliveryType">
+                         <label id="pickup">Pickup</label>
+                         <input value="pickup" type="radio" id="pickup" formControlName="deliveryType">
+                         @if(userForm.get('deliveryType')?.hasError('required')){
+                             <p>Please select an option.</p>
+                         }
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>
+                         <button mat-flat-button type="submit" [disabled]="invalid()">Check out!</button>
+                     </td>
+                 </tr>
+     
+             </tbody>
+     
+         @if(cart.length>0){
+             <table>
+                 <thead>
+                     <tr>
+                         <td>Name</td>
+                         <td>Quantity</td>
+                         <td>Price</td>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     @for(item of cart; track $index){
+                         <tr>
+     
+                             <td>{{item.name}}</td>
+                             <td>{{item.quantity}}</td>
+                             <td>{{item.quantity* item.price | currency}}</td>
+                         </tr>
+                     }
+                 </tbody>
+                 <tfoot>
+                     <tr>
+                         <td colspan="2">Total</td>
+                         <td>{{totalCost() | currency}}</td>
+                     </tr>
+     
+                 </tfoot>
+             </table>
+         }
+     </table>
+     </form>
+     <!-- <h1>Debug</h1>
+     {{this.userForm.value |json}}
+     <br>
+     {{this.cart | json}} -->
+     

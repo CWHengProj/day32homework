@@ -1,82 +1,71 @@
-<!-- <p>debug: {{userForm.value|json}}</p> -->
- <!-- <p>debug: cart size is {{cart.length}}</p> -->
-<h4>Form</h4>
-<form action="submit" [formGroup]="userForm" (submit)="submitForm()">
-<table>
-        <tbody>
-            <tr>
-                <td>
-                    <label id="name">Name:</label>
-                </td>
-                <td>
-                    <input type="text" id="name" formControlName="name">
-                    @if(userForm.get('name')?.hasError('required') && !userForm.get('name')?.pristine){
-                        <p>Username needs to be at least 5 characters.</p>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label id="address">Address:</label>
-                </td>
-                <td>
-                    <input type="text" id="address" formControlName="address">
-                    @if(userForm.get('address')?.hasError('required') && !userForm.get('address')?.pristine){
-                        <p>Address needs to be at least 5 characters.</p>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Delivery Method:</label>
-                    <label id="delivery">Delivery</label>
-                    <input value="delivery" type="radio" id="delivery" formControlName="deliveryType">
-                    <label id="pickup">Pickup</label>
-                    <input value="pickup" type="radio" id="pickup" formControlName="deliveryType">
-                    @if(userForm.get('deliveryType')?.hasError('required')){
-                        <p>Please select an option.</p>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button mat-flat-button type="submit" [disabled]="invalid()">Check out!</button>
-                </td>
-            </tr>
-
-        </tbody>
-
-    @if(cart.length>0){
-        <table>
-            <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Quantity</td>
-                    <td>Price</td>
-                </tr>
-            </thead>
-            <tbody>
-                @for(item of cart; track $index){
-                    <tr>
-
-                        <td>{{item.name}}</td>
-                        <td>{{item.quantity}}</td>
-                        <td>{{item.quantity* item.price | currency}}</td>
-                    </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="2">Total</td>
-                    <td>{{totalCost() | currency}}</td>
-                </tr>
-
-            </tfoot>
-        </table>
+<form [formGroup]="userForm" (submit)="submitForm()" class="form-container">
+    <!-- Name Input -->
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required>
+      @if(userForm.get('name')?.hasError('required') && userForm.get('name')?.touched){
+        <mat-error>Username needs to be at least 5 characters.</mat-error>
+      }
+    </mat-form-field>
+  
+    <!-- Address Input -->
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input matInput formControlName="address" required>
+      @if(userForm.get('address')?.hasError('required') && userForm.get('address')?.touched){
+        <mat-error>Address needs to be at least 5 characters.</mat-error>
+      }
+    </mat-form-field>
+  
+    <!-- Delivery Method -->
+    <div class="delivery-method">
+      <mat-label>Delivery Method:</mat-label>
+      <mat-radio-group formControlName="deliveryType">
+        <mat-radio-button value="delivery">Delivery</mat-radio-button>
+        <mat-radio-button value="pickup">Pickup</mat-radio-button>
+      </mat-radio-group>
+      @if(userForm.get('deliveryType')?.hasError('required') && userForm.get('deliveryType')?.touched){
+        <mat-error>Please select an option.</mat-error>
+      }
+    </div>
+  
+    <!-- Submit Button -->
+    <button mat-flat-button 
+            color="primary" 
+            type="submit" 
+            [disabled]="userForm.invalid"
+            class="submit-button">
+      Check out!
+    </button>
+  
+    <!-- Cart Table -->
+    @if(cart.length > 0){
+      <mat-table [dataSource]="cart" class="cart-table">
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let item">{{item.name}}</mat-cell>
+        </ng-container>
+  
+        <!-- Quantity Column -->
+        <ng-container matColumnDef="quantity">
+          <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
+          <mat-cell *matCellDef="let item">{{item.quantity}}</mat-cell>
+        </ng-container>
+  
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+          <mat-cell *matCellDef="let item">{{item.quantity * item.price | currency}}</mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="['name', 'quantity', 'price']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['name', 'quantity', 'price']"></mat-row>
+    </mat-table>
+    <!-- Total -->
+    <div class="total-cost">
+      <h3>Total: {{totalCost() | currency}}</h3>
+    </div>
+  
     }
-</table>
-</form>
-<h1>Debug</h1>
-{{this.userForm.value |json}}
-<br>
-{{this.cart | json}}
+  </form>

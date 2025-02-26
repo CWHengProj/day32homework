@@ -1,0 +1,28 @@
+<table>
+    <thead>Inventory</thead>
+    <tbody>
+            @for(fruit of fruits;track $index){
+                <div>
+
+                    <tr>
+                        <img src={{fruit.imageUrl}} alt="{{fruit.name}}">
+                    </tr>
+                    <tr>
+                        <td>
+                            Name: {{fruit.name}}
+                        </td>
+                        <td>
+                            Price: {{fruit.price}}
+                        </td>
+                        <td>
+                            Quantity: {{fruit.quantity}}
+                        </td>
+                    </tr>
+                    <p>
+                        <button type="button" (click)="removeFruit(fruit)">-</button>
+                        <button type="button" (click)="addFruit(fruit)">+</button>
+                    </p>
+                </div>
+            }
+    </tbody>
+</table>
